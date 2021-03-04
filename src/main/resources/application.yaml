@@ -4,6 +4,8 @@ server:
   compression:
     enabled: false
 spring:
+  profiles:
+    active: dev
   mvc:
     pathmatch:
       use-suffix-pattern: true
@@ -16,19 +18,24 @@ spring:
       enabled: always
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-
-    # H2 database configuration.
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:file:~/.halo/db/halo
-    username: admin
+    # MySQL database configuration.
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/halo_dev?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
     password: 123456
 
-  h2:
-    console:
-      settings:
-        web-allow-others: false
-      path: /h2-console
-      enabled: false
+    # H2 database configuration.
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:file:~/.halo/db/halo
+#    username: admin
+#    password: 123456
+
+#  h2:
+#    console:
+#      settings:
+#        web-allow-others: false
+#      path: /h2-console
+#      enabled: false
   jpa:
     hibernate:
       ddl-auto: update
@@ -52,7 +59,7 @@ logging:
     run.halo.app: INFO
     org.eclipse.jetty.server.HttpChannel: ERROR
   file:
-    path: ${user.home}/.halo/logs
+    path: ${user.home}/halo/logs
 
 springfox:
   documentation:

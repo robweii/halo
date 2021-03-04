@@ -4,32 +4,22 @@ server:
   compression:
     enabled: false
 spring:
-  jackson:
-    date-format: yyyy-MM-dd HH:mm:ss
-  output:
-    ansi:
-      enabled: always
   datasource:
-    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://localhost:3306/halo_dev?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
 
-    # H2 database configuration.
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:file:~/halo-dev/db/halo
-    username: admin
-    password: 123456
-
-    # MySQL database configuration.
-  #    driver-class-name: com.mysql.cj.jdbc.Driver
-  #    url: jdbc:mysql://127.0.0.1:3306/halo_dev?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
-  #    username: root
+  # H2 database configuration.
+  #    driver-class-name: org.h2.Driver
+  #    url: jdbc:h2:file:~/halo-dev/db/halo
+  #    username: admin
   #    password: 123456
 
-  h2:
-    console:
-      settings:
-        web-allow-others: true
-      path: /h2-console
-      enabled: true
+
+#  h2:
+#    console:
+#      settings:
+#        web-allow-others: true
+#      path: /h2-console
+#      enabled: true
   jpa:
     hibernate:
       ddl-auto: update
@@ -43,12 +33,6 @@ spring:
       max-request-size: 10240MB
   cache:
     type: none
-management:
-  endpoints:
-    web:
-      base-path: /api/admin/actuator
-      exposure:
-        include: [ 'httptrace', 'metrics','env','logfile','health' ]
 logging:
   level:
     run.halo.app: DEBUG
